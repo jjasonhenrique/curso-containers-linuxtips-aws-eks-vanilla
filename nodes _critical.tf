@@ -1,7 +1,6 @@
-# resource "aws_eks_node_group" "on_demand" {
+# resource "aws_eks_node_group" "critical" {
 #   cluster_name    = aws_eks_cluster.main.id
-#   node_group_name = format("%s-on_demand", aws_eks_cluster.main.id)
-
+#   node_group_name = format("%s-critical", aws_eks_cluster.main.id)
 
 #   node_role_arn = aws_iam_role.eks_nodes_role.arn
 
@@ -17,10 +16,13 @@
 
 #   capacity_type = "ON_DEMAND"
 
+#   ami_type = "BOTTLEROCKET_x86_64"
+
 #   labels = {
-#     "capacity/os"   = "AMAZON_LINUX"
+#     "capacity/os"   = "BOTTLEROCKET"
 #     "capacity/arch" = "x86_64"
 #     "capacity/type" = "ON_DEMAND"
+#     "severity"      = "CRITICAL"
 #   }
 
 #   tags = {
