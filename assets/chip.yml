@@ -30,8 +30,11 @@ spec:
           name: http
         resources:
           requests:
-            cpu: 100m
-            memory: 128Mi
+            cpu: 1048m
+            memory: 2048Mi
+          limits:
+            cpu: 1048m
+            memory: 2048Mi
         startupProbe:
           failureThreshold: 10
           httpGet:
