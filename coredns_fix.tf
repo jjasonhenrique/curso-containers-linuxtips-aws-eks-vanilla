@@ -37,6 +37,10 @@ resource "aws_security_group" "coredns_fix" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  
+  depends_on = [ 
+    aws_iam_role_policy_attachment.coredns_fix 
+  ]
 }
 
 data "archive_file" "coredns_archive" {
