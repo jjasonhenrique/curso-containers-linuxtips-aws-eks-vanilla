@@ -1,12 +1,12 @@
 resource "helm_release" "metrics_server" {
   name       = "metrics-server"
-  repository = "https://charts.bitnami.com/bitnami"
+  repository = "https://kubernetes-sigs.github.io/metrics-server"
   chart      = "metrics-server"
   namespace  = "kube-system"
 
   wait = false
 
-  version = "7.2.16"
+  version = "3.12.2"
 
   set {
     name  = "apiService.create"

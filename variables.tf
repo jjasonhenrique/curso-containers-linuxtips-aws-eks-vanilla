@@ -11,18 +11,18 @@ variable "k8s_version" {
 }
 
 variable "addon_coredns_version" {
-  type = string
-  default = "v1.11.3-eksbuild.1" 
+  type    = string
+  default = "v1.11.3-eksbuild.1"
 }
 
 variable "addon_kubeproxy_version" {
-  type = string
+  type    = string
   default = "v1.31.2-eksbuild.3"
 }
 
 variable "addon_cni_version" {
-  type = string
-  default = "v1.18.3-eksbuild.2" 
+  type    = string
+  default = "v1.18.3-eksbuild.2"
 }
 
 variable "ssm_vpc" {
@@ -52,3 +52,22 @@ variable "auto_scale_options" {
 variable "nodes_instance_sizes" {
   type = list(string)
 }
+
+variable "karpenter_capacity" {
+  type = list(object({
+    name               = string
+    workload           = string
+    ami_family         = string
+    ami_ssm            = string
+    instance_family    = list(string)
+    instance_sizes     = list(string)
+    capacity_type      = list(string)
+    availability_zones = list(string)
+
+  }))
+}
+
+
+# variable "karpenter_capacity_v2" {
+#   type = map(any)
+# }

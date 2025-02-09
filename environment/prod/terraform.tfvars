@@ -31,3 +31,36 @@ ssm_pod_subnets = [
   "/linuxtips-networking/subnets/private/us-east-1b/linuxtips-pods-1b",
   "/linuxtips-networking/subnets/private/us-east-1c/linuxtips-pods-1c"
 ]
+
+karpenter_capacity = [{
+  name               = "linuxtips-capacity"
+  workload           = "linuxtips-workload"
+  ami_family         = "AL2023"
+  ami_ssm            = "/aws/service/eks/optimized-ami/1.31/amazon-linux-2023/x86_64/standard/recommended/image_id"
+  instance_family    = ["t3a", "t3"]
+  instance_sizes     = ["large", "medium"]
+  capacity_type      = ["spot", "on-demand"]
+  availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
+}]
+
+
+# karpenter_capacity_v2 = [{
+#   linuxtips-capacity = {
+#     workload           = "linuxtips-workload"
+#     ami_family         = "AL2023"
+#     ami_ssm            = "/aws/service/eks/optimized-ami/1.31/amazon-linux-2023/x86_64/standard/recommended/image_id"
+#     instance_family    = ["t3a", "t3"]
+#     instance_sizes     = ["large", "medium"]
+#     capacity_type      = ["spot", "on-demand"]
+#     availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
+#   },
+#   linuxtips-capacity = {
+#     workload           = "linuxtips-workload2"
+#     ami_family         = "AL2023"
+#     ami_ssm            = "/aws/service/eks/optimized-ami/1.31/amazon-linux-2023/x86_64/standard/recommended/image_id"
+#     instance_family    = ["t3a", "t3"]
+#     instance_sizes     = ["large", "medium"]
+#     capacity_type      = ["spot", "on-demand"]
+#     availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
+#   }  
+# }]
