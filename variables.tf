@@ -68,6 +68,13 @@ variable "karpenter_capacity" {
 }
 
 
-# variable "karpenter_capacity_v2" {
-#   type = map(any)
-# }
+variable "dns_name" {
+  type = string
+  default = "*.jjasonhenrique.com" 
+}
+
+variable "route53_hosted_zone" {
+  type = string
+  default = "Z07635783HGZJJYGC3J7C"
+  
+}
