@@ -43,6 +43,14 @@ karpenter_capacity = [{
   availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
 }]
 
+nginx_min_replicas = 2
+nginx_max_replicas = 15
+
+nginx_requests_memory = "512Mi"
+nginx_requests_cpu = "250m"
+
+nginx_limits_memory = "1Gi"
+nginx_limits_cpu = "500m"
 
 # karpenter_capacity_v2 = [{
 #   linuxtips-capacity = {

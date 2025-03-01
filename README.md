@@ -16,4 +16,17 @@ aws eks update-kubeconfig --region us-east-1 --name cluster-vanilla
 
 curl k8s-chip-chipingr-87f13d5df5-1982577811.us-east-1.elb.amazonaws.com -H "Host: chip.jjasonhenrique.com"
 
+### Curl with nginx
+
+curl --location --request POST 'cluster-vanilla-e25253e0235deb3f.elb.us-east-1.amazonaws.com/calculator'  \
+--header 'Content-Type: application/json' \
+--header 'Host: health.jjasonhenrique.com' \
+--data-raw '{
+   "age": 39,
+   "weight": 75.0,
+   "height": 1.75,
+   "gender": "M",
+   "activity_intensity": "very_active"
+} ' --silent | jq .
+
 
