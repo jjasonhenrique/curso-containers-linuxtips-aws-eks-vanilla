@@ -52,3 +52,15 @@ variable "auto_scale_options" {
 variable "nodes_instance_sizes" {
   type = list(string)
 }
+
+variable "nginx_min_replicas" {}
+
+variable "nginx_max_replicas" {}
+
+variable "nginx_requests_memory" {}
+
+variable "nginx_requests_cpu" {}
+
+variable "nginx_limits_memory" {}
+
+variable "nginx_limits_cpu" {}
