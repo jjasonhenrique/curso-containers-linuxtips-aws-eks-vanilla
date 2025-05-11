@@ -25,6 +25,26 @@ variable "addon_cni_version" {
   default = "v1.18.3-eksbuild.2" 
 }
 
+variable "addon_pod_identity_version" {
+  type = string
+  default = "v1.3.4-eksbuild.1" 
+}
+
+variable "addon_ebs_csi_version" {
+  type = string
+  default = "v1.39.0-eksbuild.1" 
+}
+
+variable "addon_efs_csi_version" {
+  type = string
+  default = "v2.1.4-eksbuild.1" 
+}
+
+variable "addon_s3_csi_version" {
+  type = string
+  default = "v1.11.0-eksbuild.1" 
+}
+
 variable "ssm_vpc" {
   type = string
 }
