@@ -119,11 +119,11 @@ resource "aws_iam_policy" "aws_lb_policy" {
   name        = format("%s-aws-load-balancer", var.project_name)
   path        = "/"
   description = var.project_name
-  policy = data.aws_iam_policy_document.aws_lb_policy.json
+  policy      = data.aws_iam_policy_document.aws_lb_policy.json
 }
 
 resource "aws_iam_policy_attachment" "aws_lb_policy" {
-  name = "aws_lb_policy"
-  roles = [aws_iam_role.aws_lb_controller.name]
+  name       = "aws_lb_policy"
+  roles      = [aws_iam_role.aws_lb_controller.name]
   policy_arn = aws_iam_policy.aws_lb_policy.arn
 }

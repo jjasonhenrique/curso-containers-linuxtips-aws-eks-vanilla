@@ -11,18 +11,33 @@ variable "k8s_version" {
 }
 
 variable "addon_coredns_version" {
-  type = string
-  default = "v1.11.3-eksbuild.1" 
+  type    = string
+  default = "v1.11.3-eksbuild.1"
 }
 
 variable "addon_kubeproxy_version" {
-  type = string
+  type    = string
   default = "v1.31.2-eksbuild.3"
 }
 
 variable "addon_cni_version" {
-  type = string
-  default = "v1.18.3-eksbuild.2" 
+  type    = string
+  default = "v1.18.3-eksbuild.2"
+}
+
+variable "addon_pod_identity_version" {
+  type    = string
+  default = "v1.3.4-eksbuild.1"
+}
+
+variable "addon_efs_csi_version" {
+  type    = string
+  default = "v2.1.4-eksbuild.1"
+}
+
+variable "grafana_host" {
+  type    = string
+  default = ""
 }
 
 variable "ssm_vpc" {

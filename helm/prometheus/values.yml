@@ -1,0 +1,61 @@
+prometheus:
+  enabled: true
+  prometheusSpec:
+
+    retention: 7d
+
+    nodeSelector:
+      eks.amazonaws.com/nodegroup: "prometheus"
+
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: "efs-prometheus"
+          accessModes:
+            - ReadWriteMany
+          resources:
+            requests:
+              storage: 50Gi
+
+    podMonitorSelector: {}
+    podMonitorSelectorNilUsesHelmValues: false
+    ruleSelector: {}
+    ruleSelectorNilUsesHelmValues: false
+    serviceMonitorSelector: {}
+    serviceMonitorSelectorNilUsesHelmValues: false
+    scrapeConfigSelectorNilUsesHelmValues: false
+
+kubeStateMetrics:
+  enabled: false
+
+alertmanager:
+  enabled: false
+
+grafana:
+  enabled: true
+  adminUser: jason
+  adminPassword: linuxtips
+
+  initChownData:
+    enabled: false
+
+  persistence:
+    enabled: true
+    storageClassName: "efs-grafana"
+    accessModes:
+      - ReadWriteMany
+    size: 10Gi
+  
+  nodeSelector:
+    eks.amazonaws.com/nodegroup: "prometheus"
+
+prometheusOperator:
+  enabled: true
+  namespaces: ''
+  denyNamespaces: ''
+  prometheusInstanceNamespaces: ''
+  alertmanagerInstanceNamespaces: ''
+  thanosRulerInstanceNamespaces: ''
+
+  nodeSelector:
+    eks.amazonaws.com/nodegroup: "prometheus"

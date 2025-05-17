@@ -3,22 +3,22 @@ resource "helm_release" "nginx_controller" {
   namespace  = "ingress-nginx"
   chart      = "ingress-nginx"
   repository = "https://kubernetes.github.io/ingress-nginx"
-  version    = "4.11.3" 
+  version    = "4.11.3"
 
   create_namespace = true
 
   set {
-    name = "controller.service.internal.enabled"
+    name  = "controller.service.internal.enabled"
     value = "true"
   }
 
   set {
-    name = "controller.publishService.enable"
+    name  = "controller.publishService.enable"
     value = "true"
   }
 
   set {
-    name = "controller.service.type"
+    name  = "controller.service.type"
     value = "NodePort"
   }
 
@@ -58,11 +58,32 @@ resource "helm_release" "nginx_controller" {
   }
 
   set {
-    name = "controller.kind"
+    name  = "controller.kind"
     value = "Deployment"
     #value = "DaemonSet"
-    }
+  }
 
+  # Service Monitor
+
+  set {
+    name  = "controller.metrics.enabled"
+    value = "true"
+  }
+
+  set {
+    name  = "controller.metrics.serviceMonitor.enabled"
+    value = "true"
+  }
+
+  set {
+    name  = "controller.podAnnotations.prometheus\\.io/scrape"
+    value = "true"
+  }
+
+  set {
+    name  = "controller.podAnnotations.prometheus\\.io/port"
+    value = "10254"
+  }
 }
 
 
@@ -81,7 +102,7 @@ resource "kubectl_manifest" "target_binding_80" {
     targetType: instance
 YAML
 
-  depends_on = [ 
+  depends_on = [
     helm_release.nginx_controller
-   ]
+  ]
 }
