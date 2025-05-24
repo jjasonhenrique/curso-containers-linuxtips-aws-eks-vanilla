@@ -20,6 +20,11 @@ resource "kubernetes_manifest" "ec2_node_class" {
       ]
     }
   }
+  depends_on = [ 
+    aws_eks_cluster.main,
+    aws_eks_node_group.main,
+    helm_release.karpenter
+  ]
 }
 
 resource "kubernetes_manifest" "node_pool" {
@@ -73,4 +78,9 @@ resource "kubernetes_manifest" "node_pool" {
       }
     }
   }
+  depends_on = [ 
+    aws_eks_cluster.main,
+    aws_eks_node_group.main,
+    helm_release.karpenter
+  ]
 }

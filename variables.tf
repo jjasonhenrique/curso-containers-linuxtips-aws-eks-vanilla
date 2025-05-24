@@ -66,8 +66,3 @@ variable "karpenter_capacity" {
 
   }))
 }
-
-
-# variable "karpenter_capacity_v2" {
-#   type = map(any)
-# }
