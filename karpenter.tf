@@ -27,7 +27,7 @@ resource "kubernetes_manifest" "ec2_node_class" {
   ]
 }
 
-resource "kubernetes_manifest" "node_pool" {
+resource "kubernetes_manifest" "nodepool" {
   count = length(var.karpenter_capacity)
   manifest = {
     apiVersion = "karpenter.sh/v1"
