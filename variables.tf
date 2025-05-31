@@ -68,14 +68,44 @@ variable "nodes_instance_sizes" {
   type = list(string)
 }
 
-variable "nginx_min_replicas" {}
+variable "istio_version" {
+  type = string
+  description = "Versao do Istio"
+  default = "1.25.0"
+}
 
-variable "nginx_max_replicas" {}
+variable "istio_min_replicas" {
+  type = string
+  description = ""
+  default = "3"
+}
 
-variable "nginx_requests_memory" {}
+variable "istio_max_replicas" {
+  type = string
+  description = ""
+  default = "10"
+}
 
-variable "nginx_requests_cpu" {}
+variable "istio_cpu_threshold" {
+  type = string
+  description = ""
+  default = "60"  
+}
 
-variable "nginx_limits_memory" {}
+variable "jaeger_host" {
+  type = string
+  description = ""
+  default = "jaeger.jjasonhenrique.com"
+}
 
-variable "nginx_limits_cpu" {}
+variable "kiali_host" {
+  type = string
+  description = ""
+  default = "kiali.jjasonhenrique.com"
+}
+
+variable "kiali_version" {
+  type = string
+  description = ""
+  default = "2.5"
+}

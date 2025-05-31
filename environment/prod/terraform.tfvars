@@ -32,13 +32,4 @@ ssm_pod_subnets = [
   "/linuxtips-networking/subnets/private/us-east-1c/linuxtips-pods-1c"
 ]
 
-nginx_min_replicas = 2
-nginx_max_replicas = 15
-
-nginx_requests_memory = "512Mi"
-nginx_requests_cpu    = "250m"
-
-nginx_limits_memory = "1Gi"
-nginx_limits_cpu    = "500m"
-
 grafana_host = "grafana.jjasonhenrique.com"

@@ -7,7 +7,7 @@ aws eks update-kubeconfig --region us-east-1 --name cluster-vanilla
 
 ### Teste Curl Health-API
 
-curl --location --request POST 'cluster-vanilla-6a1d43227e032c4f.elb.us-east-1.amazonaws.com/calculator'  \
+curl --location --request POST 'cluster-vanilla-cb79d296380f30c9.elb.us-east-1.amazonaws.com/calculator'  \
 --header 'Content-Type: application/json' \
 --header 'Host: health.jjasonhenrique.com' \
 --data-raw '{
@@ -20,7 +20,7 @@ curl --location --request POST 'cluster-vanilla-6a1d43227e032c4f.elb.us-east-1.a
 
 ### Loop
 
-while true; do curl --location --request POST 'cluster-vanilla-6a1d43227e032c4f.elb.us-east-1.amazonaws.com/calculator'  \
+while true; do curl --location --request POST 'cluster-vanilla-cb79d296380f30c9.elb.us-east-1.amazonaws.com/calculator'  \
 --header 'Content-Type: application/json' \
 --header 'Host: health.jjasonhenrique.com' \
 --data-raw '{
