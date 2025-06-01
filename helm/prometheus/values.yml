@@ -5,7 +5,7 @@ prometheus:
     retention: 7d
 
     nodeSelector:
-      eks.amazonaws.com/nodegroup: "prometheus"
+      karpenter.sh/nodepool: "prometheus"
 
     storageSpec:
       volumeClaimTemplate:
@@ -26,7 +26,7 @@ prometheus:
     scrapeConfigSelectorNilUsesHelmValues: false
 
 kubeStateMetrics:
-  enabled: false
+  enabled: true
 
 alertmanager:
   enabled: false
@@ -47,7 +47,7 @@ grafana:
     size: 10Gi
   
   nodeSelector:
-    eks.amazonaws.com/nodegroup: "prometheus"
+    karpenter.sh/nodepool: "prometheus"
 
 prometheusOperator:
   enabled: true
@@ -58,4 +58,4 @@ prometheusOperator:
   thanosRulerInstanceNamespaces: ''
 
   nodeSelector:
-    eks.amazonaws.com/nodegroup: "prometheus"
+    karpenter.sh/nodepool: "prometheus"

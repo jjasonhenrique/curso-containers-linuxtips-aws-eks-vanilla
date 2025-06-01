@@ -39,6 +39,6 @@ resource "helm_release" "alb_ingress_controller" {
 
   depends_on = [
     aws_eks_cluster.main,
-    aws_eks_node_group.main
+    helm_release.karpenter
   ]
 }

@@ -109,3 +109,23 @@ variable "kiali_version" {
   description = ""
   default = "2.5"
 }
+
+variable "keda_version" {
+  type = string
+  description = ""
+  default = "2.16.0"
+}
+
+variable "karpenter_capacity" {
+  type = list(object({
+    name               = string
+    workload           = string
+    ami_family         = string
+    ami_ssm            = string
+    instance_family    = list(string)
+    instance_sizes     = list(string)
+    capacity_type      = list(string)
+    availability_zones = list(string)
+
+  }))
+}

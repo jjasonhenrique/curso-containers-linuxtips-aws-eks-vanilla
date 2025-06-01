@@ -20,7 +20,7 @@ curl --location --request POST 'cluster-vanilla-cb79d296380f30c9.elb.us-east-1.a
 
 ### Loop
 
-while true; do curl --location --request POST 'cluster-vanilla-cb79d296380f30c9.elb.us-east-1.amazonaws.com/calculator'  \
+while true; do curl --location --request POST 'cluster-vanilla-d8a6050efca3dbad.elb.us-east-1.amazonaws.com/calculator'  \
 --header 'Content-Type: application/json' \
 --header 'Host: health.jjasonhenrique.com' \
 --data-raw '{
@@ -30,3 +30,11 @@ while true; do curl --location --request POST 'cluster-vanilla-cb79d296380f30c9.
    "gender": "M",
    "activity_intensity": "very_active"
 } ' --silent | jq . ; echo ; done
+
+## Burn CPU
+
+while true; do curl -iv chip.jjasonhenrique.com/burn/cpu; echo ; done
+
+## Run Testes
+
+while true; do k6 run ./testes/load.js; echo ; done

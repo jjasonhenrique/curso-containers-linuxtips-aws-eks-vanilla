@@ -14,8 +14,9 @@ resource "helm_release" "prometheus" {
 
   depends_on = [
     aws_eks_cluster.main,
-    aws_eks_node_group.main,
-    aws_eks_node_group.prometheus
+    helm_release.karpenter,
+    kubernetes_manifest.ec2_node_class,
+    kubernetes_manifest.nodepool
   ]
 }
 

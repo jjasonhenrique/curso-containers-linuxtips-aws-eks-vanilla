@@ -33,3 +33,28 @@ ssm_pod_subnets = [
 ]
 
 grafana_host = "grafana.jjasonhenrique.com"
+kiali_host = "kiali.jjasonhenrique.com"
+
+karpenter_capacity = [
+  {
+    name               = "apps"
+    workload           = "apps"
+    ami_family         = "AL2023"
+    ami_ssm            = "/aws/service/eks/optimized-ami/1.31/amazon-linux-2023/x86_64/standard/recommended/image_id"
+    instance_family    = ["t3a", "t3"]
+    instance_sizes     = ["large", "medium"]
+    capacity_type      = ["spot"]
+    availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
+  },
+  {
+    name               = "prometheus"
+    workload           = "prometheus"
+    ami_family         = "AL2023"
+    ami_ssm            = "/aws/service/eks/optimized-ami/1.31/amazon-linux-2023/x86_64/standard/recommended/image_id"
+    instance_family    = ["t3a", "t3"]
+    instance_sizes     = ["large", "medium"]
+    capacity_type      = ["spot"]
+    availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
+  }
+]
+
