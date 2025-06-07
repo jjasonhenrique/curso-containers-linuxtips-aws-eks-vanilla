@@ -34,6 +34,7 @@ ssm_pod_subnets = [
 
 grafana_host = "grafana.jjasonhenrique.com"
 kiali_host = "kiali.jjasonhenrique.com"
+argo_rollouts_host = "argo-rollouts.jjasonhenrique.com"
 
 karpenter_capacity = [
   {

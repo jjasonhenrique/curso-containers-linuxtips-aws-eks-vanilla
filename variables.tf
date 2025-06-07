@@ -129,3 +129,15 @@ variable "karpenter_capacity" {
 
   }))
 }
+
+variable "argo_rollouts_version" {
+  type = string
+  description = ""
+  default = "2.34.1"
+}
+
+variable "argo_rollouts_host" {
+  type = string
+  description = ""
+  default = "argo-rollouts.jjasonhenrique.com"
+}

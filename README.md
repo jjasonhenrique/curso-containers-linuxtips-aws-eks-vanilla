@@ -38,3 +38,7 @@ while true; do curl -iv chip.jjasonhenrique.com/burn/cpu; echo ; done
 ## Run Testes
 
 while true; do k6 run ./testes/load.js; echo ; done
+
+## Loop Version
+
+while true; do curl chip.jjasonhenrique.com/version ; echo ;  sleep 0.5 ; done
