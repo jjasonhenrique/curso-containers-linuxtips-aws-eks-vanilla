@@ -1,0 +1,83 @@
+app:
+  name: linuxtips
+  namespace: linuxtips
+  createNamespace: true
+  iam: ""
+
+  capacity:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi
+    autoscaling:
+      minReplicas: 1
+      maxReplicas: 10
+
+  probes:
+    readinessProbe:
+      enabled: true
+      failureThreshold: 10
+      periodSeconds: 10
+      httpGet:
+        path: /
+        port: 8080
+    livenessProbe:
+      enabled: true
+      failureThreshold: 10
+      periodSeconds: 10
+      httpGet:
+        path: /
+        port: 8080
+    startupProbe:
+      enabled: true
+      failureThreshold: 10
+      periodSeconds: 10
+      httpGet:
+        path: /
+        port: 8080
+
+  rollout:
+    revisionHistoryLimit: 10
+    version: v1
+    strategy:
+      canary:
+        enabled: true
+        steps:
+        - setWeight: 20
+        - pause: {duration: 30s}
+        - setWeight: 40
+        - pause: {duration: 30s}
+        - setWeight: 60
+        - pause: {duration: 30s}
+        - setWeight: 80
+        - pause: {duration: 30s}
+        - setWeight: 100
+      blueGreen:
+        enabled: false
+  
+  image:
+    repository: nginx
+    tag: latest
+    pullPolicy: IfNotPresent
+
+  
+  envs:
+  - name: ENV
+    value: "dev"
+  - name: FOO
+    value: "bar"
+  
+  nodeSelector:
+  - label: ""
+
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+    - name: https
+      port: 443
+      targetPort: 443
+

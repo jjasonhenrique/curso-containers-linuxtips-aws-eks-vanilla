@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: {{ include "chart.fullname" . }}-green-success-rate
+  labels:
+  {{- include "chart.labels" . | nindent 4 }}
+spec:
+  metrics:
+  - count: 1
+    failureLimit: 0
+    interval: 2m
+    name: success-rate
+    provider:
+      prometheus:
+        address: http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090
+        query: |
+          sum(irate(
+            istio_requests_total{destination_service=~"chip-green.chip.svc.cluster.local",response_code!~"5.*"}[5m]
+          )) /
+          sum(irate(
+            istio_requests_total{destination_service=~"chip-green.chip.svc.cluster.local"}[5m]
+          ))
+    successCondition: result[0] >= 0.95
