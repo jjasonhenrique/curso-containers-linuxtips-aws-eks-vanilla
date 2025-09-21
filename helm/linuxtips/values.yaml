@@ -14,6 +14,9 @@ app:
     autoscaling:
       minReplicas: 1
       maxReplicas: 10
+    nodepool:
+      enabled: true
+      name: apps
 
   probes:
     readinessProbe:
@@ -56,7 +59,94 @@ app:
         - setWeight: 100
       blueGreen:
         enabled: false
+    analysisTemplates:
+    - name: 'istio-sucess'
+      spec:
+        metrics:
+        - name: 'sucess-rate'
+          interval: 2m
+          failureLimit: 0
+          successCondition: result[0] >= 0.95
+          count: 1
+          provider:
+            prometheus:
+              address: http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090
+              query: |
+                sum(irate(
+                  istio_requests_total{destination_service=~"linuxtips.linuxtips.svc.cluster.local",response_code!~"5.*"}[5m]
+                )) /
+                sum(irate(
+                  istio_requests_total{destination_service=~"linuxtips.linuxtips.svc.cluster.local"}[5m]
+                ))
   
+  istio:
+    host: linuxtips.jjasonhenrique.com.br
+    gateway:
+      enabled: true
+      protocol: http
+      port: 80
+
+    virtualService:
+      enabled: true
+      http: 
+        enabled: true
+        port: 80
+        retries:
+          attempts: 1
+          perTryTimeout: 2s
+          retryOn: 5xx
+
+  prometheus:
+    serviceMonitor:
+      enabled: true
+      interval: 30s
+      scrapeTimeout: 10s
+      port: http
+      path: /metrics
+
+  keda:
+    enabled: true
+
+    hpaConfig:
+      behavior:
+        scaleDown:
+          stabilizationWindowSeconds: 20
+        scaleUp:
+          stabilizationWindowSeconds: 20
+      cooldownPeriod: 30
+      pollingInterval: 10
+
+    prometheus:
+    # - name: keda-scale-tps
+    #   metricName: istio_requests_total
+    #   query: "sum(rate(istio_requests_total{destination_service_name=\"linuxtips\"}[1m]))"
+    #   serverAddress: http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090
+    #   threshold: "10"
+
+    cron:
+    # - name: scale-up
+    #   start: 40 14 * * *       
+    #   end: 40 18 * * *         
+    #   timezone: "America/Sao_Paulo"
+    #   desiredReplicas: 20
+
+    memory:
+    # - name: memory-high
+    #   metricType: Utilization
+    #   threshold: 80
+
+    sqs:
+    # - name: queue-high
+    #   metricType: Utilization
+    #   awsRegion: us-east-1
+    #   queueURL: https://sqs.us-east-1.amazonaws.com/123456789012/MyQueue
+    #   queueLength: 50
+
+    cpu:
+    - name: cpu-high
+      metricType: Utilization
+      threshold: 80
+
   image:
     repository: nginx
     tag: latest
