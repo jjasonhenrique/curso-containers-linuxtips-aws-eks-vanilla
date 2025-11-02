@@ -16,7 +16,7 @@ app:
       maxReplicas: 10
     nodepool:
       enabled: true
-      name: apps
+      name: prometheus
 
   probes:
     readinessProbe:

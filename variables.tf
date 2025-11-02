@@ -141,3 +141,9 @@ variable "argo_rollouts_host" {
   description = ""
   default = "argo-rollouts.jjasonhenrique.com"
 }
+
+variable "argocd_host" {
+  type = string
+  description = ""
+  default = "argocd.jjasonhenrique.com"
+}

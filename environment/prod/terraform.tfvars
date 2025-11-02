@@ -1,4 +1,4 @@
-project_name = "cluster-vanilla"
+project_name = "cluster-vanilla-new"
 
 region = "us-east-1"
 
@@ -44,7 +44,7 @@ karpenter_capacity = [
     ami_ssm            = "/aws/service/eks/optimized-ami/1.31/amazon-linux-2023/x86_64/standard/recommended/image_id"
     instance_family    = ["t3a", "t3"]
     instance_sizes     = ["large", "medium"]
-    capacity_type      = ["spot"]
+    capacity_type      = ["spot", "on_demand"]
     availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
   },
   {
@@ -54,7 +54,7 @@ karpenter_capacity = [
     ami_ssm            = "/aws/service/eks/optimized-ami/1.31/amazon-linux-2023/x86_64/standard/recommended/image_id"
     instance_family    = ["t3a", "t3"]
     instance_sizes     = ["large", "medium"]
-    capacity_type      = ["spot"]
+    capacity_type      = ["spot", "on_demand"]
     availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
   }
 ]
